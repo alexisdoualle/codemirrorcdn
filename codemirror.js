@@ -3181,7 +3181,7 @@ function drawSelectionRange(cm, range$$1, output) {
       var ch = side == "after" ? extent.begin : extent.end - (/\s/.test(lineObj.text.charAt(extent.end - 1)) ? 2 : 1);
       return coords(ch, prop)[prop]
     }
-
+    if (cm.state.newIsolate) { lineObj.order = cm.state.newIsolate = null; } // remove previous order in case an isolate marker was added
     var order = getOrder(lineObj, doc.direction);
     iterateBidiSections(order, fromArg || 0, toArg == null ? lineLen : toArg, function (from, to, dir, i, atomic) {
       var ltr = dir == "ltr";
