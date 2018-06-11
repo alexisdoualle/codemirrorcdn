@@ -1119,7 +1119,7 @@ var bidiOrdering = (function() {
           for (++i$7; i$7 < len && types[i$7] != "L"; ++i$7) {}
           for (var j$2 = pos; j$2 < i$7;) {
             if (countsAsNum.test(types[j$2])) {
-              if (pos < j$2) { order.splice(at, 0, new BidiSpan(1, pos, j$2,isolate, atomic)); }
+              if (pos < j$2) { order.splice(at, 0, new BidiSpan(1, pos, j$2, isolate, atomic)); }
               var nstart = j$2;
               for (++j$2; j$2 < i$7 && countsAsNum.test(types[j$2]); ++j$2) {}
               order.splice(at, 0, new BidiSpan(2, nstart, j$2, isolate, atomic));
@@ -5831,6 +5831,7 @@ TextMarker.prototype.clear = function () {
       if (span.to != null) { max = lineNo(line); }
       if (span.from != null) { min = lineNo(line); }
     }
+    if (cm) { cm.state.newIsolate = true; }
     line.markedSpans = removeMarkedSpan(line.markedSpans, span);
     if (span.from == null && this$1.collapsed && !lineIsHidden(this$1.doc, line) && cm)
       { updateLineHeight(line, textHeight(cm.display)); }
