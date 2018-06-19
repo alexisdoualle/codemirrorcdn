@@ -1092,13 +1092,14 @@ var bidiOrdering = (function() {
           for (end$1 = i$6 + 1; end$1 < isolateLen && isNeutral.test(types[end$1]); ++end$1) {}
           var before = (i$6 - textAndIsolates[i$6b].from ? types[i$6-1] : outerType) == "L";
           var after = (end$1 < isolateLen ? types[end$1] : outerType) == "L";
-          replace$1 = before == after ? (before ? "L" : "R") : outerType; 
+          replace$1 = before == after ? (before ? "L" : "R") : isolateDir ? isolateDir == "rtl" ? "R" : "L" : outerType;
           for (var j$1 = i$6; j$1 < end$1; ++j$1) { types[j$1] = replace$1; }
           i$6 = end$1 - 1;
         }
       }
     }
-
+    // console.log(outerType);
+    
     // Here we depart from the documented algorithm, in order to avoid
     // building up an actual levels array. Since there are only three
     // levels (0, 1, 2) in an implementation that doesn't take
